@@ -8,12 +8,19 @@
   text-align: center;
   line-height: 107.14rpx;
 }
+.today {
+  color: #24CACB;
+}
+.choice {
+  border-radius: 50%;
+  background: #24CACB;
+  background-position:center;
+  transition: 0.2s;
+  color: white;
+}
 /* 非本月日期 */
 .notCurrent {
   color: silver;
-}
-.today {
-  color: green;
 }
 .day-hover {
   background: red;
@@ -22,11 +29,9 @@
   height: 643rpx;
   width: 100%;
 }
-.prev {
-  margin-right: 20rpx;
-}
-.next {
-  margin-left: 20rpx;
+.arrow {
+  width: 100rpx;
+  text-align: center;
 }
 
 .flex {

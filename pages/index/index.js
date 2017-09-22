@@ -15,7 +15,6 @@ const conf = {
 			third: [],
 			fourth: []
 		},
-		choiceDate: '2017-01-01',
 		swiperMap: ['first', 'second', 'third', 'fourth'],
 		swiperIndex: 1
 	},
@@ -36,6 +35,11 @@ const conf = {
 			date: `${year}-${month}`
 		})
 	},
+	/**
+	 * 
+	 * 左右滑动
+	 * @param {any} e 
+	 */
 	swiperChange (e) {
 		const lastIndex = this.data.swiperIndex
 		, currentIndex = e.detail.current
@@ -61,7 +65,7 @@ const conf = {
 		year = time[key].year
 		month = time[key].month
 		date = `${year}-${month}`
-		day = 1
+		day = '01'
 		if (today.indexOf(date) !== -1) {
 			day = today.slice(-2)
 		}
@@ -105,12 +109,15 @@ const conf = {
 		let {month, year} = this.data
 		, time = this.countMonth(year, month)
 		, tapMon = e.currentTarget.dataset.month
+		, day = e.currentTarget.dataset.day
 		if ( tapMon == time.lastMonth.month ) {
 			this.changeDate(time.lastMonth.year, time.lastMonth.month)
 		} else if ( tapMon == time.nextMonth.month ) {
 			this.changeDate(time.nextMonth.year, time.nextMonth.month)
 		} else {
-			//TODO
+			this.setData({
+				day
+			})
 		}
 	},
 	bindDateChange(e) {
@@ -133,12 +140,18 @@ const conf = {
 		, time = this.countMonth(year, month)
 		this.changeDate(time.nextMonth.year, time.nextMonth.month)
 	},
+	/**
+	 * 
+	 * 直接改变日期
+	 * @param {any} year 
+	 * @param {any} month 
+	 */
 	changeDate (year, month) {
 		let {day, today} = this.data
 		, calendar = this.generateThreeMonths(year, month)
 		, date = `${year}-${month}` 
 		date.indexOf(today) === -1
-		? day = 1
+		? day = '01'
 		: day = today.slice(-2)
 
 		this.setData({
@@ -149,6 +162,13 @@ const conf = {
 			year,
 		})
 	},
+	/**
+	 * 
+	 * 月份处理
+	 * @param {any} year 
+	 * @param {any} month 
+	 * @returns 
+	 */
 	countMonth (year, month) {
 		let lastMonth = {
 			month: this.formatMonth(parseInt(month) - 1)
@@ -242,7 +262,6 @@ const conf = {
 
 		return days
 	},
-
 	/**
 	 * 
 	 * 生成日详情
@@ -320,13 +339,3 @@ const conf = {
 	}
 }
 Page(conf)
-	/**
-	 * 点击日期动画选中
-	 * 当前选中日添加事件
-	 * 
-	 */
-
-
-
-
-
